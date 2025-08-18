@@ -1,0 +1,152 @@
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  StyleSheet,
+  FlatList,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import React from 'react';
+const {width} = Dimensions.get('window');
+
+const favorites = [
+  {
+    id: '1',
+    title: 'Oppenheimer',
+    genre: 'Action',
+    duration: '180 mins',
+    rating: 9.2,
+    image: require('../oppenheimer_poster.jpg'), // Replace with your local image
+  },
+  {
+    id: '2',
+    title: 'Quantumania',
+    genre: 'Action',
+    duration: '130 mins',
+    rating: 7.8,
+    image: require('../quantumania_poster.jpg'),
+  },
+  {
+    id: '3',
+    title: 'Bholaa',
+    genre: 'Biography',
+    duration: '121 mins',
+    rating: 7.4,
+    image: require('../Bholaa_poster.jpg'),
+  },
+];
+const ImageFifthSlider = () => {
+  return (
+    <ScrollView style={styles.container}>
+      <View>
+        <Text style={styles.header}>Favorites</Text>
+        <TouchableOpacity>
+          <Text style={styles.MoreVirw2}>See All...</Text>
+        </TouchableOpacity>
+      </View>
+
+      <FlatList
+        horizontal
+        data={favorites}
+        keyExtractor={item => item.id}
+        showsHorizontalScrollIndicator={false}
+        renderItem={({item}) => (
+          <View style={styles.favoriteCard}>
+            <Image source={item.image} style={styles.favoriteImage} />
+            <View style={styles.ratingBadge}>
+              <Text style={styles.ratingText}>⭐ {item.rating}</Text>
+            </View>
+            <Text style={styles.movieTitle}>{item.title}</Text>
+            <Text style={styles.movieInfo}>
+              {item.genre} • {item.duration}
+            </Text>
+          </View>
+        )}
+      />
+    </ScrollView>
+  );
+};
+
+export default ImageFifthSlider;
+
+const styles = StyleSheet.create({
+  container: {
+    // backgroundColor: '#0f0f0f',
+    flex: 1,
+    padding: 16,
+  },
+  header: {
+    color: '#fff',
+    fontSize: 22,
+    fontWeight: '700',
+    marginBottom: 5,
+    marginTop: 10,
+  },
+  favoriteCard: {
+    width: width * 0.6,
+
+    marginRight: 15,
+  },
+  favoriteImage: {
+    width: '100%',
+    height: 250,
+    borderRadius: 12,
+  },
+  ratingBadge: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+
+    backgroundColor: '#34C759',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+  },
+  ratingBadgeSmall: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    backgroundColor: '#34C759',
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 8,
+  },
+  ratingText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  movieTitle: {
+    color: '#fff',
+    fontSize: 16,
+    marginTop: 8,
+    fontWeight: '600',
+  },
+  movieInfo: {
+    color: '#aaa',
+    fontSize: 14,
+  },
+  recommendedContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  },
+  recommendedCard: {
+    width: width / 2.3,
+
+    marginBottom: 20,
+  },
+  recommendedImage: {
+    width: '100%',
+    height: 180,
+    borderRadius: 12,
+  },
+  MoreVirw2: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    textAlign: 'right',
+    paddingRight: 7,
+    paddingBottom: 10,
+  },
+});
